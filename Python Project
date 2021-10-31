@@ -1,0 +1,94 @@
+# The logging module is imported.
+import logging
+
+# The Employee class is created, where general information about employee's is created.
+class Employee:
+    def __init__(self, first, last, username,password, department):
+        self.first = first
+        self.last = last
+        self.username = first + "." + last
+        self.password = first + last + "123"
+        self.email = first + "." + last + "@company.com"
+        self._department = department
+
+    # This function allows for an employee's full name to be printed.
+    def fullname(self):
+        return '{} {}'.format(self.first, self.last)    
+        
+        # Logger where employee information is taken and stored within the log file.
+        logger.info("Created Employee: {} - {} - {}".format(self.fullname, self.email, self._department))
+
+# Example employee is created and the full employee information is printed out. 
+emp_1 = Employee("General", "User", "", "", "IT")
+print(emp_1.__dict__)
+
+# The Developer class where the previous information is inherited from the Employee class and then the Developer's access is specified.
+class Developer(Employee):
+  def __init__(self, first, last, username, password, department, access):
+    super().__init__(first, last, username, password, department)
+    self.access = access
+            
+    # Logger that stores the first and last name of a user, along with their access.
+    logger.info("Created Employee: {} - {} - {}".format(self.first, self.last, self.access))
+
+# Example Developer is created and full employee informatin is printed.
+dev_1 = Developer("General", "User", "", "", "IT", "Read")
+print(dev_1.__dict__)
+
+# The HR class where the previous information is inherited from the Employee class and then the HR user's access is specified.
+class HR(Employee):
+  def __init__(self, first, last, username, password, department, access):
+    super().__init__(first, last, username, password, department)
+    self.access = access
+
+    # Logger that stores the first and last name of a user, along with their access.
+    logger.info("Created Employee: {} - {} - {}".format(self.first, self.last, self.access))
+
+
+# Example HR user is created and the full employee information is printed.
+hr_1 = HR("General", "User", "", "", "Human_Resources", "Read")
+print(hr_1.__dict__)
+    
+
+# The Medical class where the previous information is inherited from the Employee class and then the Medical user's access is specified.
+class Medical(Employee):
+  def __init__(self, first, last, username, password, department, access):
+    super().__init__(first, last, username, password, department)
+    self.access = access
+    
+    # Logger that stores the first and last name of a user, along with their access.
+    logger.info("Created Employee: {} - {} - {}".format(self.first, self.last, self.access))
+
+# Example Medical user is created and the full employee information is created.
+med_1 = Medical("General", "User", "", "", "Medicine", "Read")
+print(med_1.__dict__)
+
+
+
+# Login Code that first asks for the user id and password. If one of those two is incorrect, the username and password is then asked for. If the user is still unable to login they are given an error and must restart.
+class Login:
+    def __init__(self, username, password):
+        super().__init__(self, username, password)
+        
+    def check(self):
+        if (self.username == log_name and self.password == log_pass):
+            print("Login successful")
+        else:
+            print("Unsuccessful Login")
+
+
+log_name = input("Enter your user Username: ")
+log_pass = input("Enter Password: ")
+
+
+
+
+# Logging code to keep track of user's that were created. Information is stored in a file called employee.log.
+logger = logging.getLogger(__name__)
+logger.setLevel(logging.INFO)
+
+formatter = logging.Formatter('%(asctime)s:%(levelname)s:%(message)s')
+
+file_handler = logging.FileHandler("employee.log")
+file_handler.setFormatter(formatter)
+logger.addHandler(file_handler)
